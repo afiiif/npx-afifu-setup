@@ -20,8 +20,11 @@ inquirer
   .then(({ todo }) => {
     switch (todo) {
       case 1:
-        return createNextApp();
+        createNextApp();
+        break;
       case 2:
-        return setup();
+        setup();
+        break;
+      default:
     }
   });
