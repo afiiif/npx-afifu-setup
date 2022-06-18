@@ -1,0 +1,13 @@
+{
+  "name": "@afifu/setup",
+  "version": "0.1.0",
+  "description": "CLI to setup Node.js project",
+  "author": "Muhammad Afifudin",
+  "main": "index.js",
+  "bin": "index.js",
+  "dependencies": {
+    "husky": "^8.0.1",
+    "inquirer": "^8.2.4",
+    "mrm-core": "^7.0.0"
+  }
+}
