@@ -5,9 +5,18 @@
   "author": "Muhammad Afifudin",
   "main": "index.js",
   "bin": "index.js",
+  "scripts": {
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --ext .js . --fix"
+  },
   "dependencies": {
     "husky": "^8.0.1",
     "inquirer": "^8.2.4",
     "mrm-core": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
   }
 }
