@@ -8,7 +8,8 @@ const runCommand = (command) => {
   try {
     execSync(command, { stdio: 'inherit' });
   } catch (err) {
-    console.error(`Failed to execute ${command}`, err);
+    console.log(`Failed to execute ${command}`);
+    console.error(err);
     process.exit(1);
   }
 };
@@ -38,11 +39,11 @@ const createNextApp = () => {
         .then(({ pkgManager }) => {
           console.info('Cloning Next.js TS starter template...');
           runCommand(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`);
+          runCommand(`cd ${name} && git remote remove origin`);
 
           json(`${name}/package.json`).set('name', name).set('version', '0.1.0').save();
-          deleteFiles(`${name}/yarn.lock`);
-
-          runCommand(`cd ${name} && git commit --amend -m "Initialize project"`);
+          deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
+          runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
 
           console.info('Installing dependencies...');
           runCommand(`cd ${name} && ${pkgManager} install`);
