@@ -5,6 +5,7 @@ npx @afifu/setup
 ```
 
 There are 2 options:
+
 - Create Next.js TS project
 - Add additional setup to current project
 
@@ -21,7 +22,7 @@ npx @afifu/setup <app-name>
 // Example: npx @afifu/setup hello-world
 ```
 
-This will create Next.js TypeScript project cloned from [Next.js TS Starter Template](https://github.com/afiiif/nextjs-ts-starter-template), which is packed with:
+It will create Next.js TypeScript project cloned from [Next.js TS Starter Template](https://github.com/afiiif/nextjs-ts-starter-template), which is packed with:
 
 - ⚡️ Next.js 12
 - ⚛️ React 18
@@ -29,7 +30,8 @@ This will create Next.js TypeScript project cloned from [Next.js TS Starter Temp
 - 🧼 [ESLint](https://eslint.org/) — Find & fix problems in your code, and **auto sort** your imports
 - 🐶 [Husky](https://www.npmjs.com/package/husky) & [Lint Staged](https://www.npmjs.com/package/lint-staged) — Check & fix code when commit, block commit if bad code detected
 - 📜 [Commit Lint](https://github.com/conventional-changelog/commitlint) — Make sure the commit message follows the conventional commit
-- 🤖 [Github Actions](https://github.com/features/actions) — Check your code on push & pull-request
+- ⚙️ [Github Actions](https://github.com/features/actions) — Check your code on push & pull-request
+- 🤖 [Dependabot](https://github.com/dependabot) — Create pull-request to update your dependencies
 - 🔗 Absolute Import — Import modules using `@/` prefix
 
 ## Setup Existing Project
