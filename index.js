@@ -2,8 +2,14 @@
 
 const inquirer = require('inquirer');
 
-const createNextApp = require('./bin/create-next-app');
+const { createNextApp, promptNextApp } = require('./bin/create-next-app');
 const setup = require('./bin/setup');
+
+const args = process.argv.slice(2);
+
+if (args[0]) {
+  createNextApp({ name: args[0] });
+}
 
 inquirer
   .prompt([
@@ -12,19 +18,14 @@ inquirer
       name: 'todo',
       message: 'What do you want to do?',
       choices: [
-        { name: 'Create Next.js TS project', value: 1 },
-        { name: 'Add additional setup to current project', value: 2 },
+        { name: 'Create Next.js TS project', value: 'create-new' },
+        { name: 'Add additional setup to current project', value: 'setup-existing' },
       ],
     },
   ])
   .then(({ todo }) => {
-    switch (todo) {
-      case 1:
-        createNextApp();
-        break;
-      case 2:
-        setup();
-        break;
-      default:
+    if (todo === 'create-new') {
+      return promptNextApp();
     }
+    return setup();
   });

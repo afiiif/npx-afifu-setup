@@ -14,18 +14,35 @@ const runCommand = (command) => {
   }
 };
 
-const createNextApp = () => {
+const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
+  const name = nameUnvalidated.replace(/\s+/g, '-').toLowerCase();
+
+  console.info('Cloning Next.js TS starter template...');
+  runCommand(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`);
+  runCommand(`cd ${name} && git remote remove origin`);
+
+  json(`${name}/package.json`).set('name', name).set('version', '0.1.0').save();
+  deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
+  runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
+
+  console.info('Installing dependencies...');
+  runCommand(`cd ${name} && ${pkgManager} install`);
+
+  console.info('Your project is ready! 🚀');
+  console.log(`cd ${name} && ${pkgManager === 'npm' ? 'npm run' : pkgManager} dev`);
+};
+
+const promptNextApp = () => {
   inquirer
     .prompt([
       {
         type: 'input',
-        name: 'nameUnvalidated',
+        name: 'name',
         message: 'What is your project name?',
         default: 'my-app',
       },
     ])
-    .then(({ nameUnvalidated }) => {
-      const name = nameUnvalidated.replace(/\s+/g, '-').toLowerCase();
+    .then(({ name }) => {
       inquirer
         .prompt([
           {
@@ -37,21 +54,12 @@ const createNextApp = () => {
           },
         ])
         .then(({ pkgManager }) => {
-          console.info('Cloning Next.js TS starter template...');
-          runCommand(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`);
-          runCommand(`cd ${name} && git remote remove origin`);
-
-          json(`${name}/package.json`).set('name', name).set('version', '0.1.0').save();
-          deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
-          runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
-
-          console.info('Installing dependencies...');
-          runCommand(`cd ${name} && ${pkgManager} install`);
-
-          console.info('Your project is ready! 🚀');
-          console.log(`cd ${name} && ${pkgManager === 'npm' ? 'npm run' : pkgManager} dev`);
+          createNextApp({ name, pkgManager });
         });
     });
 };
 
-module.exports = createNextApp;
+module.exports = {
+  createNextApp,
+  promptNextApp,
+};
