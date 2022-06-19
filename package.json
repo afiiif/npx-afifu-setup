@@ -1,7 +1,7 @@
 {
   "name": "@afifu/setup",
-  "version": "0.1.0",
-  "description": "CLI to setup Node.js project",
+  "version": "0.2.0",
+  "description": "CLI to create Next.js project or setup existing project",
   "author": "Muhammad Afifudin",
   "main": "index.js",
   "bin": "index.js",
