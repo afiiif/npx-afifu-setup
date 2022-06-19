@@ -1,18 +1,9 @@
-const { execSync } = require('child_process');
 const inquirer = require('inquirer');
 const { json, deleteFiles } = require('mrm-core');
 
-const TEMPLATE_REPO = 'https://github.com/afiiif/nextjs-ts-starter-template.git';
+const runCommand = require('../utils/run-command');
 
-const runCommand = (command) => {
-  try {
-    execSync(command, { stdio: 'inherit' });
-  } catch (err) {
-    console.log(`Failed to execute ${command}`);
-    console.error(err);
-    process.exit(1);
-  }
-};
+const TEMPLATE_REPO = 'https://github.com/afiiif/nextjs-ts-starter-template.git';
 
 const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
   const name = nameUnvalidated.replace(/\s+/g, '-').toLowerCase();
@@ -28,8 +19,10 @@ const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
   console.info('Installing dependencies...');
   runCommand(`cd ${name} && ${pkgManager} install`);
 
-  console.info('Your project is ready! 🚀');
-  console.log(`cd ${name} && ${pkgManager === 'npm' ? 'npm run' : pkgManager} dev`);
+  console.info('\nYour project is ready! 🚀\n');
+  console.log(`cd ${name} && ${pkgManager === 'npm' ? 'npm run' : pkgManager} dev\n`);
+
+  runCommand(`cd ${name} && code .`, null);
 };
 
 const promptNextApp = () => {
