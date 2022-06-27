@@ -7,7 +7,9 @@ const setup = require('./bin/setup');
 
 const args = process.argv.slice(2);
 
-console.log('Args:', args);
+const packageJson = require('./package.json');
+
+console.log(`\nRunning ${packageJson.name} v${packageJson.version}\n`);
 
 if (args[0]) {
   createNextApp({ name: args[0] });
