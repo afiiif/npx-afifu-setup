@@ -26,6 +26,22 @@ const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
   runCommand(`cd ${name} && code .`, null);
 };
 
+const promptPkgManager = ({ name = 'my-app' }) => {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'pkgManager',
+        message: 'What package manager do you want to use?',
+        choices: ['npm', 'yarn', 'pnpm'],
+        default: 'yarn',
+      },
+    ])
+    .then(({ pkgManager }) => {
+      createNextApp({ name, pkgManager });
+    });
+};
+
 const promptNextApp = () => {
   inquirer
     .prompt([
@@ -37,23 +53,12 @@ const promptNextApp = () => {
       },
     ])
     .then(({ name }) => {
-      inquirer
-        .prompt([
-          {
-            type: 'list',
-            name: 'pkgManager',
-            message: 'What package manager do you want to use?',
-            choices: ['npm', 'yarn', 'pnpm'],
-            default: 'yarn',
-          },
-        ])
-        .then(({ pkgManager }) => {
-          createNextApp({ name, pkgManager });
-        });
+      promptPkgManager({ name });
     });
 };
 
 module.exports = {
-  createNextApp,
   promptNextApp,
+  promptPkgManager,
+  createNextApp,
 };

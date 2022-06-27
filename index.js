@@ -1,18 +1,34 @@
 #! /usr/bin/env node
 
 const inquirer = require('inquirer');
+const yargs = require('yargs/yargs');
+const { hideBin } = require('yargs/helpers');
 
-const { createNextApp, promptNextApp } = require('./bin/create-next-app');
+const { createNextApp, promptNextApp, promptPkgManager } = require('./bin/create-next-app');
 const setup = require('./bin/setup');
 
-const args = process.argv.slice(2);
+const { argv } = yargs(hideBin(process.argv));
+const {
+  _: [appName],
+  npm,
+  yarn,
+  pnpm,
+} = argv;
 
 const packageJson = require('./package.json');
 
 console.log(`\nRunning ${packageJson.name} v${packageJson.version}\n`);
 
-if (args[0]) {
-  createNextApp({ name: args[0] });
+if (appName) {
+  if (yarn) {
+    createNextApp({ name: appName, pkgManager: 'yarn' });
+  } else if (npm) {
+    createNextApp({ name: appName, pkgManager: 'npm' });
+  } else if (pnpm) {
+    createNextApp({ name: appName, pkgManager: 'pnpm' });
+  } else {
+    promptPkgManager({ name: appName });
+  }
 } else {
   inquirer
     .prompt([
