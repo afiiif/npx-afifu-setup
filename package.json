@@ -1,6 +1,6 @@
 {
   "name": "@afifu/setup",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "CLI to create Next.js project or setup existing project",
   "author": "Muhammad Afifudin",
   "main": "index.js",

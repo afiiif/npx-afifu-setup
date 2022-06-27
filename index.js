@@ -7,6 +7,8 @@ const setup = require('./bin/setup');
 
 const args = process.argv.slice(2);
 
+console.log('Args:', args);
+
 if (args[0]) {
   createNextApp({ name: args[0] });
 } else {
