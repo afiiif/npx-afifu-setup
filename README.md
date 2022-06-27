@@ -34,6 +34,8 @@ It will create Next.js TypeScript project cloned from [Next.js TS Starter Templa
 - ⚙️ [Github Actions](https://github.com/features/actions) — Check your code on push & pull-request
 - 🤖 [Dependabot](https://github.com/dependabot) — Create pull-request to update your dependencies
 - 🔗 Absolute Import — Import modules using `@/` prefix
+- 💟 [React Icons](https://react-icons.github.io/react-icons/) — Include popular icons in your React projects easily
+- 🌟 [React Power-Ups](https://github.com/afiiif/react-power-ups) — Collection of React hooks to speed-up your app development
 
 ## Setup Existing Project
 
