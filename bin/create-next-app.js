@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 const { json, deleteFiles } = require('mrm-core');
 
 const runCommand = require('../utils/run-command');
@@ -8,7 +9,7 @@ const TEMPLATE_REPO = 'https://github.com/afiiif/nextjs-ts-starter-template.git'
 const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
   const name = nameUnvalidated.replace(/\s+/g, '-').toLowerCase();
 
-  console.info('Cloning Next.js TS starter template...\n');
+  console.info('📥 Cloning Next.js TS starter template...\n');
   runCommand(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`);
   runCommand(`cd ${name} && git remote remove origin`);
 
@@ -16,8 +17,8 @@ const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
   deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
   runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
 
-  console.info('\n✅ Clone success');
-  console.info('\nInstalling dependencies...');
+  console.info(chalk.green('\n✅ Clone success\n'));
+  console.info(`📦 Installing dependencies using ${chalk.bold(pkgManager)}\n`);
   runCommand(`cd ${name} && ${pkgManager} install`);
 
   console.info('\nYour project is ready! 🚀\n');
@@ -38,6 +39,7 @@ const promptPkgManager = ({ name = 'my-app' }) => {
       },
     ])
     .then(({ pkgManager }) => {
+      console.log('');
       createNextApp({ name, pkgManager });
     });
 };

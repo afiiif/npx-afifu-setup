@@ -17,7 +17,7 @@ const {
 
 const packageJson = require('./package.json');
 
-console.log(`\nRunning ${packageJson.name} v${packageJson.version}\n`);
+console.log(`\n🧰 Running ${packageJson.name} v${packageJson.version}\n`);
 
 if (appName) {
   if (yarn) {

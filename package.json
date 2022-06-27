@@ -13,6 +13,7 @@
     "lint:fix": "eslint --ext .js . --fix"
   },
   "dependencies": {
+    "chalk": "4.1.2",
     "husky": "^8.0.1",
     "inquirer": "^8.2.4",
     "mrm-core": "^7.0.0",
