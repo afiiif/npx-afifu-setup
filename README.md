@@ -19,13 +19,14 @@ Or you can simply run this command,
 
 ```sh
 npx @afifu/setup <app-name>
-// Example: npx @afifu/setup hello-world
+// Example: npx @afifu/setup my-awesome-app
 ```
 
 It will create Next.js TypeScript project cloned from [Next.js TS Starter Template](https://github.com/afiiif/nextjs-ts-starter-template), which is packed with:
 
-- ⚡️ Next.js 12
-- ⚛️ React 18
+- ⚡️ [Next.js 12](https://nextjs.org/)
+- ⚛️ [React 18](https://reactjs.org/)
+- 🎐 [Tailwind CSS 3](https://tailwindcss.com/)
 - 🪄 [Prettier](https://prettier.io/) — Format your code automatically, this will also run **on save**
 - 🧼 [ESLint](https://eslint.org/) — Find & fix problems in your code, and **auto sort** your imports
 - 🐶 [Husky](https://www.npmjs.com/package/husky) & [Lint Staged](https://www.npmjs.com/package/lint-staged) — Check & fix code when commit, block commit if bad code detected
