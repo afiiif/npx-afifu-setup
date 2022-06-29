@@ -11,15 +11,15 @@ const createNextApp = ({ name: nameUnvalidated, pkgManager = 'yarn' }) => {
 
   console.info('📥 Cloning Next.js TS starter template...\n');
   runCommand(`git clone --depth 1 ${TEMPLATE_REPO} ${name}`);
-  runCommand(`cd ${name} && git remote remove origin`);
-
-  json(`${name}/package.json`).set('name', name).set('version', '0.1.0').save();
-  deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
-  runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
-
   console.info(chalk.green('\n✅ Clone success\n'));
+
+  runCommand(`cd ${name} && git remote remove origin`);
+  deleteFiles([`${name}/yarn.lock`, `${name}/.git`]);
+  json(`${name}/package.json`).set('name', name).set('version', '0.1.0').save();
+
   console.info(`📦 Installing dependencies using ${chalk.bold(pkgManager)}\n`);
   runCommand(`cd ${name} && ${pkgManager} install`);
+  runCommand(`cd ${name} && git init && git add . && git commit -m "Initialize project"`);
 
   console.info('\nYour project is ready! 🚀\n');
   console.log(`cd ${name} && ${pkgManager === 'npm' ? 'npm run' : pkgManager} dev\n`);
